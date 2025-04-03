@@ -1,0 +1,53 @@
+info.onCountdownEnd(function () {
+    game.setGameOverMessage(true, "Ok you won. :D")
+    game.gameOver(true)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Projectile, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    info.changeCountdownBy(10)
+    mySprite.setPosition(30, 81)
+    Evil_guy.setPosition(136, 16)
+})
+info.onLifeZero(function () {
+    sprites.destroy(mySprite)
+    game.setGameOverMessage(false, "Lil bro got grilled")
+    game.gameOver(false)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
+    sprites.destroyAllSpritesOfKind(SpriteKind.Food)
+    info.changeLifeBy(1)
+    info.changeCountdownBy(-5)
+})
+sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
+    info.changeLifeBy(-1)
+    sprites.destroy(Evil_guy)
+    Evil_guy = sprites.create(assets.image`myImage11`, SpriteKind.Enemy)
+    Evil_guy.setPosition(136, 7)
+    Evil_guy.follow(mySprite, 45)
+    mySprite.setPosition(30, 79)
+    info.changeCountdownBy(10)
+})
+let Heart: Sprite = null
+let mySprite: Sprite = null
+let Evil_guy: Sprite = null
+Evil_guy = sprites.create(assets.image`myImage11`, SpriteKind.Enemy)
+Evil_guy.setPosition(137, 7)
+mySprite = sprites.create(assets.image`myImage`, SpriteKind.Player)
+mySprite.setPosition(30, 79)
+info.setLife(3)
+scene.setBackgroundColor(9)
+controller.moveSprite(mySprite, 100, 100)
+mySprite.setStayInScreen(true)
+mySprite.sayText("0:", 5000, false)
+Evil_guy.follow(mySprite, 45)
+info.startCountdown(60)
+game.setGameOverScoringType(game.ScoringType.HighScore)
+let Fire_ball = sprites.createProjectileFromSide(assets.image`myImage7`, 50, 50)
+Fire_ball.setBounceOnWall(true)
+Fire_ball = sprites.createProjectileFromSide(assets.image`myImage7`, 24, 79)
+Fire_ball.setBounceOnWall(true)
+Fire_ball = sprites.createProjectileFromSide(assets.image`myImage7`, 90, 100)
+Fire_ball.setBounceOnWall(true)
+game.onUpdateInterval(25000, function () {
+    Heart = sprites.create(assets.image`myImage4`, SpriteKind.Food)
+})
