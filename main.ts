@@ -23,8 +23,8 @@ info.onLifeZero(function () {
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Food, function (sprite, otherSprite) {
     sprites.destroyAllSpritesOfKind(SpriteKind.Food)
-    info.changeLifeBy(1)
-    info.changeCountdownBy(-5)
+    info.changeLifeBy(randint(-1, 1))
+    info.changeCountdownBy(randint(-10, 10))
 })
 sprites.onOverlap(SpriteKind.Player, SpriteKind.Enemy, function (sprite, otherSprite) {
     info.changeLifeBy(-1)
@@ -58,6 +58,6 @@ Fire_ball = sprites.createProjectileFromSide(assets.image`myImage7`, 90, 100)
 Fire_ball.setBounceOnWall(true)
 Fire_ball = sprites.createProjectileFromSide(assets.image`myImage7`, -60, -50)
 Fire_ball.setBounceOnWall(true)
-game.onUpdateInterval(25000, function () {
+game.onUpdateInterval(10000, function () {
     Heart = sprites.create(assets.image`myImage4`, SpriteKind.Food)
 })
