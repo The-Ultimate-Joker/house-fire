@@ -1,5 +1,5 @@
 {
-    "name": "House Fire",
+    "name": "Da Casino",
     "version": "1.0.0",
     "description": "",
     "dependencies": {
@@ -19,7 +19,7 @@
         "test.ts"
     ],
     "targetVersions": {
-        "target": "2.0.48",
+        "target": "2.0.53",
         "targetId": "arcade"
     },
     "supportedTargets": [
